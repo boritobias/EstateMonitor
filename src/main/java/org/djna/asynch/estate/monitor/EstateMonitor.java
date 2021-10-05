@@ -37,10 +37,10 @@ public class EstateMonitor {
                 connection.start();
                 connection.setExceptionListener(this);
                 Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-                // subscribe to all thermostats
                 Topic destination = session.createTopic("home.thermostats.>");
                 MessageConsumer consumer = session.createDurableSubscriber(destination, "Thermostats");
                 ObjectMapper mapper = new ObjectMapper();
+
 
                 System.out.println("Subscribed: " + destination);
 
@@ -55,8 +55,6 @@ public class EstateMonitor {
                         String text = textMessage.getText();
                         ThermostatReading reading = mapper.readValue(text, ThermostatReading.class);
                         System.out.println("Received: " + reading);
-                        // Add business logic here
-
                     } else {
                         // but handle the unexpected
                         System.out.println("Received: " + message);

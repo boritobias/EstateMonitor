@@ -25,8 +25,8 @@ public class TelemetryEmulator {
         LOGGER.debug("debug message");
 
         // example devices
-        startWork(makeDevice("101","hall", 10), false);
-        //startWork(makeDevice("101","basement", 25), false);
+        startWork(makeDevice("101","hall", 60), false);
+        startWork(makeDevice("101","basement", 25), false);
     }
 
     // starts thread for specified emulator
@@ -53,7 +53,7 @@ public class TelemetryEmulator {
             @Override
             public void run() {
                 try {
-                   connectionFactory
+                    connectionFactory
                             = new ActiveMQConnectionFactory("tcp://localhost:61616");
                     Connection connection = connectionFactory.createConnection();
                     connection.start();
@@ -93,16 +93,11 @@ public class TelemetryEmulator {
             }
 
             private void publishTemperature( int temperature ) throws JMSException, JsonProcessingException {
-                //ThermostatReading reading = new ThermostatReading( /*some data here */);
+                ThermostatReading reading = new ThermostatReading(temperature, location);
 
-                // publish JSON from reading
-                // ObjectMapper mapper = new ObjectMapper();
-                // String text = mapper.writeValueAsString(reading);
-
-
-                String text = "{\"date\":1633362327823,\"temperature\":"
-                        + temperature
-                        + ",\"location\":\"hall\"}";
+                // publish jSON
+                ObjectMapper mapper = new ObjectMapper();
+                String text = mapper.writeValueAsString(reading);;
                 TextMessage message = session.createTextMessage(text);
 
                 System.out.println("Sent message to "
