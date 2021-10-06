@@ -9,6 +9,7 @@ import org.djna.asynch.estate.data.ThermostatReading;
 
 import javax.jms.*;
 import java.text.MessageFormat;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 // Emulates Telemetry from multiple devices.
@@ -70,19 +71,25 @@ public class TelemetryEmulator {
                     producer = session.createProducer(destination);
                     // TODO - set QOS options here
 
-                    int baseTemperature = 17;
+                    int baseTemperature = 20;
                     int temperatureSkew = 0;
 
                     // TODO - add capability for clean shutdown
                     while (! stopping) {
-                        publishTemperature(baseTemperature +temperatureSkew );
+                        publishTemperature(baseTemperature);
 
-                        // prepare next values
-                        temperatureSkew++;
-                        temperatureSkew %= 15;
+                        Random rand = new Random();
+                        temperatureSkew = rand.nextInt(7) - 3;
+                        if (baseTemperature > 29) {
+                            baseTemperature -= Math.abs(temperatureSkew);
+                        } else if (baseTemperature <= 17) {
+                            baseTemperature += Math.abs(temperatureSkew);
+                        } else {
+                            baseTemperature += temperatureSkew;
+                        }
 
                         // good citizen check
-                        int sleepFor =  frequencySeconds < 15 ? 15 : frequencySeconds;
+                        int sleepFor =  frequencySeconds < 15 ? 10 : frequencySeconds;
                         TimeUnit.SECONDS.sleep(sleepFor);
                     }
 
