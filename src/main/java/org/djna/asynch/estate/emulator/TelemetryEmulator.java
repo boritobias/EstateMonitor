@@ -75,15 +75,15 @@ public class TelemetryEmulator {
 
                     // TODO - add capability for clean shutdown
                     while (! stopping) {
-                        publishTemperature(baseTemperature +temperatureSkew );
+                        publishTemperature(baseTemperature);
 
                         // prepare next values
 //                        temperatureSkew++;
 //                        temperatureSkew %= 15;
 
                         Random rand = new Random();
-                        temperatureSkew = rand.nextInt(8) - 3;
-                        //System.out.println("base temp: " + baseTemperature + ", tempskew: " + temperatureSkew);
+                        temperatureSkew = rand.nextInt(7) - 3;
+                        System.out.println("base temp: " + baseTemperature + ", tempskew: " + temperatureSkew);
                         if (baseTemperature > 29) {
                             baseTemperature -= Math.abs(temperatureSkew);
                         } else if (baseTemperature <= 17) {
