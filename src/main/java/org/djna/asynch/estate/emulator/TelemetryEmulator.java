@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.log4j.Logger;
+import org.djna.asynch.estate.data.Property;
 import org.djna.asynch.estate.data.ThermostatReading;
 
 import javax.jms.*;
@@ -25,8 +26,9 @@ public class TelemetryEmulator {
         LOGGER.debug("debug message");
 
         // example devices
-        startWork(makeDevice("101","hall", 60), false);
-        startWork(makeDevice("101","basement", 25), false);
+        startWork(makeDevice(new Property(101,"Rosewood"),"hall", 60), false);
+        startWork(makeDevice(new Property(102,"Lillyfield"),"basement", 25), false);
+
     }
 
     // starts thread for specified emulator
@@ -37,7 +39,7 @@ public class TelemetryEmulator {
     }
 
     // Device factory
-    public static Runnable makeDevice(String property, String location, final int frequencySeconds) {
+    public static Runnable makeDevice(Property property, String location, final int frequencySeconds) {
         return new Runnable() {
             // each device establishes its own connection
             // as an enhancement we could start and stop them indepdently
@@ -61,7 +63,7 @@ public class TelemetryEmulator {
 
                     // in ActiceMQ this will create a topic if it doesn't exist
                     String topic = MessageFormat.format(
-                            "{0}.{1}.{2}", baseTopic, property, location);
+                            "{0}.{1}.{2}.{3}", baseTopic,property.getName(), property.getId(), location);
                     destination = session.createTopic(topic);
 
                     // Create a MessageProducer from the Session to the Topic or Queue

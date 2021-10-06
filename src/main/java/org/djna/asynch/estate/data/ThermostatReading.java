@@ -12,7 +12,7 @@ public class ThermostatReading {
         temperature = initTemperature;
         location = initLocation;
     }
-    
+
     public ThermostatReading(){
         date = new Date();
         temperature = 0;
