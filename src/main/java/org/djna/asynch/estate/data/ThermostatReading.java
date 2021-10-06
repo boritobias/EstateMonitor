@@ -13,12 +13,6 @@ public class ThermostatReading {
         location = initLocation;
     }
 
-    public ThermostatReading(){
-        date = new Date();
-        temperature = 0;
-        location = "unknown";
-    }
-
     public Date getDate() {
         return date;
     }
@@ -30,8 +24,6 @@ public class ThermostatReading {
     public String getLocation() {
         return location;
     }
-
-
 
     @Override
     public String toString() {

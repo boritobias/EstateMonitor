@@ -5,13 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f73a2443-f264-4550-923e-990d93918df6" name="Changes" comment="setup pom">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/djna/asynch/estate/data/Location.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/djna/asynch/estate/data/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/djna/asynch/estate/data/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/djna/asynch/estate/data/ThermostatReading.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/djna/asynch/estate/data/ThermostatReading.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/djna/asynch/estate/emulator/TelemetryEmulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/djna/asynch/estate/emulator/TelemetryEmulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/wsmqtt-eg.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/wsmqtt-eg.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -126,10 +137,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.TelemetryEmulator" />
-        <item itemvalue="Application.HomeMonitorApplication" />
         <item itemvalue="Spring Boot.HomeMonitorApplication" />
-        <item itemvalue="JavaScript Debug.monitor.html" />
         <item itemvalue="Application.EstateMonitor" />
+        <item itemvalue="Application.HomeMonitorApplication" />
+        <item itemvalue="JavaScript Debug.monitor.html" />
       </list>
     </recent_temporary>
   </component>
