@@ -5,8 +5,6 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.djna.asynch.estate.data.ThermostatReading;
 
 import javax.jms.*;
-import java.util.ArrayList;
-import java.util.List;
 
 // Estate Monitor
 // Subscribes to all topics and displays each message

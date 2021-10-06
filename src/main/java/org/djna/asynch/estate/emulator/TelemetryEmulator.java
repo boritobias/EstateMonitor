@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.log4j.Logger;
+
 import org.djna.asynch.estate.data.Location;
 import org.djna.asynch.estate.data.Property;
 import org.djna.asynch.estate.data.ThermostatReading;
