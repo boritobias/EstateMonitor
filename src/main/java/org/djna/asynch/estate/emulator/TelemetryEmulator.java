@@ -27,8 +27,8 @@ public class TelemetryEmulator {
 
         // example devices
         startWork(makeDevice("101","bathroom", 10), false);
-        startWork(makeDevice("101","bedroom", 13), false);
-        startWork(makeDevice("102","kitchen", 25), false);
+//        startWork(makeDevice("101","bedroom", 10), false);
+//        startWork(makeDevice("102","kitchen", 10), false);
     }
 
     // starts thread for specified emulator
@@ -70,7 +70,7 @@ public class TelemetryEmulator {
                     producer = session.createProducer(destination);
                     // TODO - set QOS options here
 
-                    int baseTemperature = 17;
+                    int baseTemperature = 20;
                     int temperatureSkew = 0;
 
                     // TODO - add capability for clean shutdown
@@ -82,18 +82,18 @@ public class TelemetryEmulator {
 //                        temperatureSkew %= 15;
 
                         Random rand = new Random();
-                        temperatureSkew = rand.nextInt(3);
-                        int plusOrMinus = rand.nextInt(1) == 0 ? 1 : -1;
+                        temperatureSkew = rand.nextInt(8) - 3;
+                        //System.out.println("base temp: " + baseTemperature + ", tempskew: " + temperatureSkew);
                         if (baseTemperature > 29) {
-                            baseTemperature -= temperatureSkew;
-                        } else if (baseTemperature < 17) {
-                            baseTemperature += temperatureSkew;
+                            baseTemperature -= Math.abs(temperatureSkew);
+                        } else if (baseTemperature <= 17) {
+                            baseTemperature += Math.abs(temperatureSkew);
                         } else {
-                            baseTemperature += temperatureSkew * plusOrMinus;
+                            baseTemperature += temperatureSkew;
                         }
 
                         // good citizen check
-                        int sleepFor =  frequencySeconds < 15 ? 15 : frequencySeconds;
+                        int sleepFor =  frequencySeconds < 15 ? 10 : frequencySeconds;
                         TimeUnit.SECONDS.sleep(sleepFor);
                     }
 
