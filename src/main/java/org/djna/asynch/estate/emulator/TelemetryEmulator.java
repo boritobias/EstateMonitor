@@ -8,6 +8,7 @@ import org.djna.asynch.estate.data.ThermostatReading;
 
 import javax.jms.*;
 import java.text.MessageFormat;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 // Emulates Telemetry from multiple devices.
@@ -25,8 +26,9 @@ public class TelemetryEmulator {
         LOGGER.debug("debug message");
 
         // example devices
-        startWork(makeDevice("101","hall", 10), false);
-        //startWork(makeDevice("101","basement", 25), false);
+        startWork(makeDevice("101","bathroom", 10), false);
+        startWork(makeDevice("101","bedroom", 13), false);
+        startWork(makeDevice("102","kitchen", 25), false);
     }
 
     // starts thread for specified emulator
@@ -76,8 +78,19 @@ public class TelemetryEmulator {
                         publishTemperature(baseTemperature +temperatureSkew );
 
                         // prepare next values
-                        temperatureSkew++;
-                        temperatureSkew %= 15;
+//                        temperatureSkew++;
+//                        temperatureSkew %= 15;
+
+                        Random rand = new Random();
+                        temperatureSkew = rand.nextInt(3);
+                        int plusOrMinus = rand.nextInt(1) == 0 ? 1 : -1;
+                        if (baseTemperature > 29) {
+                            baseTemperature -= temperatureSkew;
+                        } else if (baseTemperature < 17) {
+                            baseTemperature += temperatureSkew;
+                        } else {
+                            baseTemperature += temperatureSkew * plusOrMinus;
+                        }
 
                         // good citizen check
                         int sleepFor =  frequencySeconds < 15 ? 15 : frequencySeconds;
@@ -92,6 +105,7 @@ public class TelemetryEmulator {
                 }
             }
 
+            // TODO fix this
             private void publishTemperature( int temperature ) throws JMSException, JsonProcessingException {
                 //ThermostatReading reading = new ThermostatReading( /*some data here */);
 
